@@ -20,10 +20,10 @@ int main(void)
 {
     gpio_init();
 
-    PTB->PSOR = (1U << 8U);
+    PTB->PSOR = (1U << 8U | 1<<9 | 1<<10);
 
     while (1) {
-        PTB->PTOR = (1U << 8U);
+        PTB->PTOR = (1U << 8U | 1<<9 | 1<<10);
         delay();
     }
 }
@@ -32,7 +32,9 @@ void gpio_init(void)
 {
     SIM->SCGC5 = SIM_SCGC5_PORTB_MASK;
     PORTB->PCR[8] = PORT_PCR_MUX(1U);
-    PTB->PDDR = (1U << 8U);
+    PORTB->PCR[9] = PORT_PCR_MUX(1U);
+    PORTB->PCR[10] = PORT_PCR_MUX(1U);
+    PTB->PDDR = (1U << 8U | 1<<9 | 1<<10);
 }
 
 void delay(void)

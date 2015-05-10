@@ -30,7 +30,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
     .syntax unified
-    .arch armv6-m
+    .cpu cortex-m0plus
+    .fpu softvfp
+    .thumb
 
 /* Memory Model
    The HEAP starts at the end of the DATA section and grows upward.
@@ -163,7 +165,7 @@ Reset_Handler:
 
     ldr    r0, =SystemInit
     blx    r0
-    ldr    r0, =_start
+    ldr    r0, =main
     bx    r0
     .pool
     .size Reset_Handler, . - Reset_Handler
